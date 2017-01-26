@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Plateforme d'exercices auto-corrigés</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="kartik/css/fileinput.min.css" rel="stylesheet"><link href="kartik/css/fileinput.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="pageexo.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <!--"page-header" permet d'avoir une en-tête de page -->
+        <div class="page-header">
+            <h1>Plateforme d'exercices auto-corrigés</h1>
+        </div>
+
+    </div>
+    <!-- "jumbotron" permet d'avoir des fonds coloré. -->
+    <div class="jumbotron">
+        <!-- Remettre un "container" permet d'avoir toute la page (sans les bords arrondis) -->
+        <div class="container">
+            <!-- Séparation du bandeau en trois parties égales: 3*4colonnes (utilisation de la grille bootstrap) -->
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-4">
+                    <h3>Tous les exercices</h3>
+                    <ul>
+                        <li>Affichage de tous les exercices de la plateforme</li>
+                        <li>Laissez toutes les options par défaut</li>
+                    </ul>
+                </div>
+                <div class="col-lg-offset-1 col-lg-6">
+                    <h3>Options avancées</h3>
+                    <ul>
+                        <li>Sélection du niveau de difficulté minimum</li>
+                        <li>Sélection du niveau de difficulté maximum</li>
+                        <li>Séléction des tags</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+
+        <div class="row">
+
+
+
+            <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Choix avancés</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form class="form-horizontal" id="rechercheAvanceeForm">
+                                    <fieldset>
+                                        <!-- Multiple Radios (inline) -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="dif_min">Difficulté minimum</label>
+                                            <div class="col-lg-4">
+                                                <label class="radio-inline" for="dif_min">
+                                                    <input type="radio" name="dif_min" id="dif_min_1" value="1" checked>
+                                                    1
+                                                </label>
+                                                <label class="radio-inline" for="radios-1">
+                                                    <input type="radio" name="dif_min" id="dif_min_2" value="2">
+                                                    2
+                                                </label>
+                                                <label class="radio-inline" for="radios-2">
+                                                    <input type="radio" name="dif_min" id="dif_min_3" value="3">
+                                                    3
+                                                </label>
+                                                <label class="radio-inline" for="radios-3">
+                                                    <input type="radio" name="dif_min" id="dif_min_4" value="4">
+                                                    4
+                                                </label>
+                                                <label class="radio-inline" for="radios-4">
+                                                    <input type="radio" name="dif_min" id="dif_min_5" value="5">
+                                                    5
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Multiple Radios (inline) -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="dif_max">Difficulté maximum</label>
+                                            <div class="col-lg-4">
+                                                <label class="radio-inline" for="dif_max_1">
+                                                    <input type="radio" name="dif_max" id="dif_max_1" value="1">
+                                                    1
+                                                </label>
+                                                <label class="radio-inline" for="dif_max_2">
+                                                    <input type="radio" name="dif_max" id="dif_max_2" value="2">
+                                                    2
+                                                </label>
+                                                <label class="radio-inline" for="dif_max_3">
+                                                    <input type="radio" name="dif_max" id="dif_max_3" value="3">
+                                                    3
+                                                </label>
+                                                <label class="radio-inline" for="dif_max_4">
+                                                    <input type="radio" name="dif_max" id="dif_max_4" value="4">
+                                                    4
+                                                </label>
+                                                <label class="radio-inline" for="dif_max_5">
+                                                    <input type="radio" name="dif_max" id="dif_max_5" value="5" checked>
+                                                    5
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Multiple Checkboxes (inline) -->
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label" for="tags">Tags</label>
+                                            <div class="col-lg-10" id="tagslocalisation">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-offset-2 col-lg-3">
+                                                <button id="decoche" class="btn btn-warning">
+                                                    <span class="glyphicon glyphicon-unchecked"></span>
+                                                    <br>Décocher les tags
+                                                </button>
+                                            </div>
+
+                                            <div class="col-lg-3">
+                                                <button id="coche" class="btn btn-warning">
+                                                    <span class="glyphicon glyphicon-check"></span>
+                                                    <br>Cocher les tags
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <br/>
+
+                                        <div class = "row">
+
+                                            <div class=" col-lg-offset-2 col-lg-5 col-lg-offset-5">
+                                                <button id="rechercheAvanceeButton" class="btn btn-block btn-success">
+                                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                                    <br>Recherche
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'exercice</th>
+                            <th>Tags</th>
+                            <th>Niveau de diffculté</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer>
+        </footer>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="bootstrap/js/jquery-3.1.1.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="kartik/js/fileinput.min.js"></script>
+
+    <script>
+    $(function (){
+        loadtags();
+
+        $("#rechercheAvanceeButton").click(function(event){
+            $("#content").replaceWith("<tbody id=\"content\"></tbody>");
+            event.preventDefault();
+            formData = $("#rechercheAvanceeForm").serialize();
+            console.log(formData);
+            // Envoie via AJAX
+            $.ajax({
+                url: '/api/gettagsexo',
+                type: 'GET',
+                data: formData,
+            }).done(function(data){
+                $.each(data, function (key, val) {
+                    $("<tr><td><a href=/ressources/pageExo.html?exo=" + val.nomExoRepertoire + ">"+
+                    val.nom +"</a></td><td>" + val.tags + "</td><td>" + val.difficulte
+                    + "</td></tr>").appendTo("#content");
+                });
+            }).fail(function (data) {
+                // Execution si ERREUR
+                alert(data);
+            });
+        });
+
+        $("#decoche").click(function(event){
+            event.preventDefault();
+            $('#tagslocalisation input').removeAttr("checked");
+        });
+
+        $("#coche").click(function(event){
+            event.preventDefault();
+            $('#tagslocalisation input').attr("checked","");
+        });
+
+    });
+
+    //Chargement des différents Tags possibles
+    function loadtags() {
+        $.getJSON("/api/gettags", function (data) {
+            $.each(data, function (key, val) {
+                console.log(val);
+                $("<label class=\"checkbox-inline\" for=\"tags\"><input type=\"checkbox\" name=\"tags\" id=\""
+                +val+"\" value=\""+val+"\" checked>"+val+"</label>")
+                .appendTo("#tagslocalisation");
+            });
+        });
+    }
+    </script>
+</body>
+</html>

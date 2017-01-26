@@ -1,0 +1,39 @@
+plugins {
+  id 'java'
+  id 'application'
+  id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+repositories {
+
+    jcenter()
+}
+
+sourceCompatibility = '1.8'
+mainClassName = 'io.vertx.core.Launcher'
+
+dependencies {
+//    compile 'org.slf4j:slf4j-api:1.7.21'
+    testCompile 'junit:junit:4.12'
+
+    //Sources Vert.X 3.3
+    compile "io.vertx:vertx-core:3.3.3"
+    compile "io.vertx:vertx-unit:3.3.3"
+    compile 'io.vertx:vertx-web:3.3.3'
+    compile 'io.vertx:vertx-mongo-client:3.3.3'
+
+}
+
+shadowJar {
+  classifier = 'fat'
+  manifest{
+    attributes 'Main-Verticle': 'io.vertx.blog.plateforme.VerticlePlateforme'
+  }
+  mergeServiceFiles {
+    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.8'
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Exercice HelloWord</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="kartik/css/fileinput.min.css" rel="stylesheet"><link href="kartik/css/fileinput.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="pageexo.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <!--"page-header" permet d'avoir une en-tête de page -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-5" id="titre">
+
+                </div>
+                <div class="col-lg-5 col-lg-offset-1" id="diff">
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- "jumbotron" permet d'avoir des fonds coloré. -->
+    <div class="jumbotron">
+        <!-- Remettre un "container" permet d'avoir toute la page (sans les bords arrondis) -->
+        <div class="container">
+            <!-- Séparation du bandeau en trois parties -->
+            <div class="row">
+                <!-- Partie 1: Pré-requis -->
+                <div class="col-lg-4">
+                    <h2>Prérequis</h2>
+                    <ul id="listPres_requis">
+                    </ul>
+                </div>
+                <!-- Partie 2: Objectifs -->
+                <div class="col-lg-4">
+                    <h2>Objectifs</h2>
+                    <ul id="listObjectifs">
+                    </ul>
+                </div>
+                <!-- Partie 3: Tags -->
+                <div class="col-lg-4">
+                    <h2>Tags</h2>
+                    <ul id="listTags">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+
+        <!-- Division de l'écran en deux parties, une pour le sujet et une pour le rendu -->
+        <div class="row">
+
+            <div class="col-lg-4">
+                <!-- Création du panneau "travail" -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Sujet</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a href="#" id="linkSujet" class="btn btn-primary btn-danger"><span class="glyphicon glyphicon-floppy-save"></span>
+                                    <br>Télécharger le sujet
+                                </a>
+                            </div>
+                            <div class="col-lg-6">
+                                <a href="#" id="linkSources" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-paperclip"></span>
+                                    <br>Autres sources
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8  ">
+                <!-- Création du panneau "Rendus" -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Déposer son code</h2>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Declaration du nouveau formulaire -->
+                        <form id="uploadForm" enctype="multipart/form-data" class="col-lg-10">
+
+                            <!-- Cet input va créer un bouton pour envoyer les données -->
+                            <br>
+                            <input type="submit" name="Submit" value="Send File" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zonne de retour des informations à l'étudiant -->
+        <div id="retour" class="well well-lg">
+            Sources pas encore envoyées
+        </div>
+
+        <!-- Bouton de retour home -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-2">
+                    <a href="/ressources/index.html" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-home"></span>
+                        <br>Retour Home
+                    </a>
+                </div>
+
+                <div class="col-lg-offset-7 col-lg-3">
+                    <div class="well well-lg">
+                        <b>INSA de Lyon</b>
+                        <br>Département du Premier Cycle
+                        <br>Département TC
+                        <br>Alexandre CLAUDE
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="bootstrap/js/jquery-3.1.1.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="kartik/js/fileinput.min.js"></script>
+
+
+        <script>
+        $(function (){
+            load();
+
+            $("#uploadForm").submit(function(event){
+                var exo = window.location.search.split('=')[1];
+                // Permet de ne pas recharger la page après l'envoie
+                event.preventDefault();
+                // Récupération des fichiers à envoyer
+                var formData = new FormData($(this)[0]);
+                formData.append('exo',exo);
+                console.log(formData);
+                // Envoie via AJAX
+                $.ajax({
+                    url: '/api/postfile',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                }).done(function(data){
+                    // Execution si OK
+                    console.log(data);
+                    $("#retour").html(data);
+                }).fail(function (data) {
+                    // Execution si ERREUR
+                    $("#retour").html("Erreur dans l'envoie des fichiers");
+                });
+            });
+        });
+
+        function load() {
+            var exo = window.location.search.split('=')[1];
+            console.log(exo);
+            $.ajax({
+                url: '/api/getoneexo',
+                type: 'GET',
+                data: {
+                    nom: exo,
+                },
+            }).done(function(data){
+                console.log(data);
+                //On construit la page WEB avec les informations reçues
+
+                //Titre de l'exercice
+                $("<h1>Exercice: "+data.nom+"</h1>").appendTo("#titre");
+                //difficulte
+                $("<h1>Difficulté: "+data.difficulte+"</h1>").appendTo("#diff");
+                //pres_requis: parcours de l'array via jquery.each()
+                $.each(data.pres_requis, function( index, value ) {
+                    $("<li>"+value+"</li>").appendTo("#listPres_requis");
+                });
+                //objectifs: parcours de l'array via jquery.each()
+                $.each(data.objectifs, function( index, value ) {
+                    $("<li>"+value+"</li>").appendTo("#listObjectifs");
+                });
+                //tags: parcours de l'array via jquery.each()
+                $.each(data.tags, function( index, value ) {
+                    $("<li>"+value+"</li>").appendTo("#listTags");
+                });
+                //Classe .java devant être rendues par l'étudiant
+                $.each(data.rendus, function(index,value){
+                    $("<div class=\"panel panel-default\"><div class=\"panel-heading\">"+
+                    "<h2 class=\"panel-title\">"+value+"</h2></div><div class=\"panel-body\">"+
+                    "<input id=\""+value+"\" name=\""+value+
+                    "\" type=\"file\" class=\"file\" multiple data-show-upload=\"false\""+
+                    " data-show-caption=\"true\" data-show-preview=\"true\"></div></div>")
+                    .prependTo("#uploadForm");
+                });
+                //Lien vers le sujet et les autres sources
+                var sujet="/ressources/exercices/"+exo+"/sujet.pdf";
+                var sources="/ressources/exercices/"+exo+"/sources.zip";
+                $("#linkSujet").attr('href',sujet);
+                $("#linkSources").attr('href',sources);
+
+
+            }).fail(function (data) {
+                // Execution si ERREUR
+                console.log(data);
+                $("#retour").text("Erreur lors de la construction de la page");
+            });
+
+        }
+
+        </script>
+    </body>
+    </html>

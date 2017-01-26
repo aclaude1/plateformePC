@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Administation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="kartik/css/fileinput.min.css" rel="stylesheet"><link href="kartik/css/fileinput.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="pageexo.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <!--"page-header" permet d'avoir une en-tête de page -->
+        <div class="page-header">
+            <h1>Administration de la plateforme</h1>
+        </div>
+
+        <div class="row">
+
+            <div class=" col-lg-offset-1 col-lg-10 col-lg-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Ajout d'un exercice dans la base de données</h2>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Declaration du nouveau formulaire -->
+                        <form id="uploadForm" enctype="multipart/form-data" class="col-lg-10">
+
+                            <div class="form-group">
+                                <label for="nom">Nom de l'exercice</label>
+                                <input type="text" name="nom" class="form-control" id="nom" placeholder="Nom de l'exercice">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="ancienTags">Tags: Utilisation d'ancien tags</label>
+                                <div id="tagslocalisation">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tags">Tags: Création de nouveau tags (séparés par des virgules)</label>
+                                <input type="text" name="nouveauTags" class="form-control" id="tags" placeholder="Exemple: java,main,orienté objets">
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pre_requis">Prérequis (Séparés par des virgules)</label>
+
+                                <input type="text" name="pre_requis" class="form-control" id="pre_requis" placeholder="Prérequis">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="objectifs">Objectifs (Séparés par des virgules)</label>
+                                <input type="text" name="objectif" class="form-control" id="objectif" placeholder="Objectifs">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="difficulte">Difficulté</label><br/>
+                                <label class="radio-inline" for="difficulte">
+                                    <input type="radio" name="difficulte" id="difficulte_1" value="1" checked="checked">
+                                    1
+                                </label>
+                                <label class="radio-inline" for="difficulte_1">
+                                    <input type="radio" name="difficulte" id="difficulte_2" value="2">
+                                    2
+                                </label>
+                                <label class="radio-inline" for="difficulte_2">
+                                    <input type="radio" name="difficulte" id="difficulte_3" value="3">
+                                    3
+                                </label>
+                                <label class="radio-inline" for="difficulte_4">
+                                    <input type="radio" name="difficulte" id="difficulte_4" value="4">
+                                    4
+                                </label>
+                                <label class="radio-inline" for="difficulte_5">
+                                    <input type="radio" name="difficulte" id="difficulte_5" value="5">
+                                    5
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rendus">Nom des sources à rendre</label>
+                                <br><i>Fichiers .java devant être rendus par l'étudiant (séparés par des virgules)</i></br>
+                                <input type="text" name="rendus" class="form-control" id="rendus" placeholder="Exemple: Meuble.java,Lit.java,Table.java,Lampe.java">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="sujet">sujet.pdf</label>
+                                <br><i>Sujet à destination de l'étudiant</i></br>
+                                <input id="sujet.pdf" name="sujet.pdf" type="file" class="file"
+                                multiple data-show-upload="false" data-show-caption="true" data-show-preview="false">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="sources">drivers.zip</label>
+                                <br><i>Dossier contenant la classe Driver_tests.java ainsi que les autres classes nécessaires à la correction</i></br>
+                                <input id="drivers.zip" name="drivers.zip" type="file" class="file"
+                                multiple data-show-upload="false" data-show-caption="true" data-show-preview="false">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="sources">Sources.zip (Optionel)</label>
+                                <br><i>Zip optionel pour donner plus de ressources à l'étudiant<i>
+                                <input id="sources.zip" name="sources.zip" type="file" class="file"
+                                multiple data-show-upload="false" data-show-caption="true" data-show-preview="false">
+                            </div>
+                            <input type="submit" name="Submit" value="Envoi des données" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class=" col-lg-offset-1 col-lg-10 col-lg-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Suppression d'un exercice</h2>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Declaration du nouveau formulaire -->
+                        <form id="deleteExo" enctype="multipart/form-data" class="col-lg-10">
+                            <div class="form-group">
+                                <label class="control-label" for="exo">Exercice à supprimer</label>
+                                <div class="col-lg-12" id="listexo">
+                                </div>
+                            </div>
+                            <input type="submit" name="Submit" value="Suppression de l'exercice" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class=" col-lg-offset-1 col-lg-10 col-lg-offset-1">
+                <div id="retour" class="well well-lg">
+                    L'Ajout/Suppression d'un exercice dans la base nessécite plusieurs opérations importantes.
+                    <br/> C'est pourquoi les traitements peuvent prendre du temps.
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+            <div class="row">
+                <div class="col-lg-2">
+                    <a href="/ressources/index.html" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-home"></span>
+                        <br>Retour Home
+                    </a>
+                </div>
+
+                <div class="col-lg-offset-7 col-lg-3">
+                    <div class="well well-lg">
+                        <b>INSA de Lyon</b>
+                        <br>Département du Premier Cycle
+                        <br>Département TC
+                        <br>Alexandre CLAUDE
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="bootstrap/js/jquery-3.1.1.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="kartik/js/fileinput.min.js"></script>
+
+
+        <script>
+        $(function (){
+            loadExo();
+            loadTags();
+
+
+
+            $("#uploadForm").submit(function(event){
+                // Permet de ne pas recharger la page après l'envoie
+                event.preventDefault();
+                // Récupération des fichiers à envoyer
+                var formData = new FormData($(this)[0]);
+                console.log(formData);
+                // Envoie via AJAX
+                $.ajax({
+                    url: '/api/postexo',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                }).done(function(data){
+                    // Execution si OK
+                    console.log(data);
+                    loadExo();
+                    loadTags();
+                    $("#retour").text(data);
+                }).fail(function (data) {
+                    // Execution si ERREUR
+                    $("#retour").html(data);
+                });
+            });
+
+            $("#deleteExo").submit(function(event){
+                // Permet de ne pas recharger la page après l'envoie
+                event.preventDefault();
+                // Récupération des fichiers à envoyer
+                var formData = $(this).serialize();
+                console.log(formData);
+                // Envoie via AJAX
+                $.ajax({
+                    url: '/api/delexo',
+                    type: 'DELETE',
+                    data: formData,
+                }).done(function(data){
+                    loadExo();
+                    loadTags();
+                    $("#retour").text(data);
+                }).fail(function (data) {
+                    $("#retour").text(data);
+                });
+            });
+        });
+
+        function loadExo() {
+
+            $.getJSON("/api/getallexo", function (data) {
+                $("#listexo").replaceWith("<div class=\"col-lg-12\" id=\"listexo\"></div>");
+                $.each(data, function (key, val) {
+                    $("<label class=\"radio-inline\" for=\""+val.nom+
+                    "\"><input type=\"radio\" name=\"exo\" id=\""+
+                    val.nom+"\" value=\""+val.nom+"\">"
+                    +val.nom+"</label>").appendTo("#listexo");
+                });
+            });
+        }
+
+        function loadTags() {
+            $("#tagslocalisation").replaceWith("<div id=\"tagslocalisation\"></div>");
+            $.getJSON("/api/gettags", function (data) {
+                $.each(data, function (key, val) {
+                    console.log(val);
+                    $("<label class=\"checkbox-inline\" for=\"ancienTags\"><input type=\"checkbox\" name=\"ancienTags\" id=\""
+                    +val+"\" value=\""+val+"\">"+val+"</label>")
+                    .appendTo("#tagslocalisation");
+                });
+            });
+        }
+
+        </script>
+    </body>
+    </html>
